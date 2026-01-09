@@ -28,3 +28,6 @@ buttons that are identifiable through 1 to 9
 add event listener for each (get using id)
 
 new game button pressed, button as a state
+
+
+added restart button - should reset the h1, tiles and states (array) so new game can start
