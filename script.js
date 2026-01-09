@@ -21,10 +21,10 @@ const restartH1 = document.getElementById('restartH1')
 const restart = document.getElementById('restart')
 restart.addEventListener('click', () => {
     restartH1.innerHTML = `Player X's Turn`;
-    states = statesDefault
-    statesDefault.forEach((x)=> {
+    statesDefault.forEach((x,i)=> {
         x[2].querySelector('.decision').innerHTML = '';
         turn = 'Player1';
+        states[i][1] = 'empty'
     })
 })
 
@@ -35,12 +35,15 @@ one.addEventListener('click', () => {
         states[0][2].querySelector('.decision').innerHTML = 'x';
         turn = 'Player2'
         restartH1.innerHTML = `Player o's Turn`
+        console.log(states)
     } else if (turn === 'Player2' && states[0][1] == 'empty'){
         states[0][1] = 'o'
         states[0][2].querySelector('.decision').innerHTML = 'o';
         turn = 'Player1'
-        restartH1.innerHTML = `Player 1's Turn`
+        restartH1.innerHTML = `Player x's Turn`
+        console.log(states)
     }
+    console.log(states)
 })
 
 two.addEventListener('click', () => {
@@ -154,3 +157,9 @@ nine.addEventListener('click', () => {
         restartH1.innerHTML = `Player x's Turn`    
     }
 })
+
+// game winning logic
+// combinations
+const combinations = [
+    [['one', 'empty', one], ['two', 'empty', two], ['three', 'empty', three], ['four', 'empty', four],  ['five', 'empty', five],  ['six', 'empty', six],  ['seven', 'empty', seven],  ['eight', 'empty', eight], ['nine', 'empty', nine]]
+]
