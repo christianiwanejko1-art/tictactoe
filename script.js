@@ -158,8 +158,47 @@ nine.addEventListener('click', () => {
     }
 })
 
+
+const winning = [['rows',[[1,2,3],[4,5,6],[7,8,9]]],['columns',[[1,4,7], [2,5,8], [3,6,9]]],['diaganols',[]]]
 // game winning logic
 // combinations
-const combinations = [
-    [['one', 'empty', one], ['two', 'empty', two], ['three', 'empty', three], ['four', 'empty', four],  ['five', 'empty', five],  ['six', 'empty', six],  ['seven', 'empty', seven],  ['eight', 'empty', eight], ['nine', 'empty', nine]]
-]
+/*
+rows
+
+--- 123 
+xxx xxx
+xxx xxx
+
+xxx xxx
+--- 456
+xxx xxx
+
+xxx xxx
+xxx xxx
+--- 789
+
+
+columns
+
+-xx 1xx
+-xx 4xx
+-xx 7xx
+
+x-x x2x
+x-x x5x
+x-x x8x
+
+xx- xx3
+xx- xx6
+xx- xx9
+
+
+diaganol
+-xx 1xx
+x-x x5x
+xx- xx9
+
+xx- xx3
+x-x x5x
+-xx 7xx
+*/
