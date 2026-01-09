@@ -31,3 +31,5 @@ new game button pressed, button as a state
 
 
 added restart button - should reset the h1, tiles and states (array) so new game can start
+checks the combinations array to see if winning combination is present, if it is end game and show who won
+innerhtml
