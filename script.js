@@ -14,343 +14,375 @@ let states = [['one', 'empty', one], ['two', 'empty', two], ['three', 'empty', t
 
 const winning = [['one','two','three'],['four','five','six'],['seven','eight','nine'], ['one','four','seven'], ['two','five','eight'], ['three','six','nine'], ['one','five','nine'],['three','five','seven']]
 
-let turn = 'Player1'
 let gameWon = false
 
+let turn = 'player1'
+const player1T = 'x'
+const player2T = 'o'
+// let arrExample = ['one','three','four','two']
 
-const restartH1 = document.getElementById('restartH1')
-
-const restart = document.getElementById('restart')
-restart.addEventListener('click', () => {
-    restartH1.innerHTML = `Player X's Turn`;
-    statesDefault.forEach((x,i)=> {
-        x[2].querySelector('.decision').innerHTML = '';
-        turn = 'Player1';
-        states[i][1] = 'empty'
-    })
-})
-
-// const getWinner = function () {
-//     let newarr = []
-//     let new2 = states.filter((x)=>{
-//         return x[1] == 'x'
-//     })
-//     // contains the number corresponding to states[i][0] and id in html
-//     for (i=0; i<new2.length; i++){
-//         newarr.push(new2[i][0])
-//     }
-
-//     for (let i=0; i < winning.length; i++){
-//         let a = winning[i][0]
-//         let b = winning[i][1]
-//         let c = winning[i][2]
-//         if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-//             restartH1.innerHTML = 'Player x wins!'
-//         }
-//     }
-// }
-
-
-
-one.addEventListener('click', () => {
-    if (turn === 'Player1' && states[0][1] == 'empty') {
-        states[0][1] = 'x'
-        states[0][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                restartH1.innerHTML = 'Player x wins!'
-                
+one.addEventListener('click', (x)=>{
+    arr = states[0] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    gameWon = true
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[0][1] == 'empty'){
-        states[0][1] = 'o'
-        states[0][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`
-        console.log(states)
-    }
-})
-
-two.addEventListener('click', () => {
-    if (turn === 'Player1' && states[1][1] == 'empty') {
-        states[1][1] = 'x'
-        states[1][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-        console.log(newarr)
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[1][1] == 'empty'){
-        states[1][1] = 'o'
-        states[1][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
     }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
 })
 
-three.addEventListener('click', () => {
-    if (turn === 'Player1' && states[2][1] == 'empty') {
-        states[2][1] = 'x'
-        states[2][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
 
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+
+two.addEventListener('click', (x)=>{
+    arr = states[1] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[2][1] == 'empty'){
-        states[2][1] = 'o'
-        states[2][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
-    }
-})
-
-four.addEventListener('click', () => {
-    if (turn === 'Player1' && states[3][1] == 'empty') {
-        states[3][1] = 'x'
-        states[3][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[3][1] == 'empty'){
-        states[3][1] = 'o'
-        states[3][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
     }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
 })
 
-five.addEventListener('click', () => {
-    if (turn === 'Player1' && states[4][1] == 'empty') {
-        states[4][1] = 'x'
-        states[4][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+three.addEventListener('click', (x)=>{
+    arr = states[2] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[4][1] == 'empty'){
-        states[4][1] = 'o'
-        states[4][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
-    }
-})
-
-six.addEventListener('click', () => {
-    if (turn === 'Player1' && states[5][1] == 'empty') {
-        states[5][1] = 'x'
-        states[5][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[5][1] == 'empty'){
-        states[5][1] = 'o'
-        states[5][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
     }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
 })
 
-seven.addEventListener('click', () => {
-    if (turn === 'Player1' && states[6][1] == 'empty') {
-        states[6][1] = 'x'
-        states[6][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+four.addEventListener('click', (x)=>{
+    arr = states[3] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[6][1] == 'empty'){
-        states[6][1] = 'o'
-        states[6][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
-    }
-})
-
-eight.addEventListener('click', () => {
-    if (turn === 'Player1' && states[7][1] == 'empty') {
-        states[7][1] = 'x'
-        states[7][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[7][1] == 'empty'){
-        states[7][1] = 'o'
-        states[7][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
     }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
 })
 
-nine.addEventListener('click', () => {
-    if (turn === 'Player1' && states[8][1] == 'empty') {
-        states[8][1] = 'x'
-        states[8][2].querySelector('.decision').innerHTML = 'x';
-        let newarr = []
-        let new2 = states.filter((x)=>{
-            return x[1] == 'x'
-        })
-        // contains the number corresponding to states[i][0] and id in html
-        for (i=0; i<new2.length; i++){
-            newarr.push(new2[i][0])
-        }
-
-        for (let i=0; i < winning.length; i++){
-            let a = winning[i][0]
-            let b = winning[i][1]
-            let c = winning[i][2]
-            if (newarr.includes(a) && newarr.includes(b) && newarr.includes(c)){
-                'player x won'
-                restartH1.innerHTML = 'Player x wins!'
-            } else {
-                turn = 'Player2'
-                restartH1.innerHTML = `Player o's Turn`
+five.addEventListener('click', (x)=>{
+    arr = states[4] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
             }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
         }
-    } else if (turn === 'Player2' && states[8][1] == 'empty'){
-        states[8][1] = 'o'
-        states[8][2].querySelector('.decision').innerHTML = 'o';
-        turn = 'Player1'
-        restartH1.innerHTML = `Player x's Turn`    
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
     }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
 })
 
 
+six.addEventListener('click', (x)=>{
+    arr = states[5] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
+})
 
+seven.addEventListener('click', (x)=>{
+    arr = states[6] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
+})
 
+eight.addEventListener('click', (x)=>{
+    arr = states[7] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
+})
+
+nine.addEventListener('click', (x)=>{
+    arr = states[8] // select the first array that correlates to square 1 -> ['one', 'empty', one]
+    if (turn == 'player1'){
+        if (arr[1] == 'empty'){
+            arr[1] = player1T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player1T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    } else if (turn == 'player2'){
+        if (arr[1] == 'empty'){
+            arr[1] = player2T // player one goes first
+            let target = x.target.querySelector('.decision')
+            target.textContent = player2T
+            let arrExample = []
+            for (let i=0; i<states.length; i++){
+                if (states[i][1] != 'empty'){
+                    arrExample.push(states[i][0])
+                }
+            }
+            for (let i=0; i<winning.length; i++){ // length of the winning array winning =full
+                if (arrExample.includes(winning[i][0]) && arrExample.includes(winning[i][1]) && arrExample.includes(winning[i][2])){
+                    console.log(true)
+                }
+                }
+        }
+    }
+  turn = (turn === 'player1') ? 'player2' : 'player1';
+})
 // game winning logic
 // combinations
 /*
